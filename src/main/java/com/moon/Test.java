@@ -17,8 +17,13 @@ public class Test {
             cell.setCellValue(head.getString(i));
         }
         for (int i = 0, len = body.length(); i < len; i++) {
-
+            row = sheet.createRow(i + 1);
+            JSONArray rowInfo = body.getJSONArray(i);
+            for (int j = 0, j_len = rowInfo.length(); j < j_len; j++) {
+                cell = row.createCell(j);
+                cell.setCellValue(rowInfo.getString(j));
+            }
         }
-        return null;
+        return workbook;
     }
 }
