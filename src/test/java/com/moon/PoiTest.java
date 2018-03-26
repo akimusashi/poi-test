@@ -22,7 +22,7 @@ public class PoiTest {
         bodyList.add(new MyBook("孙子兵法", "10.00"));
         HSSFWorkbook workbook = PoiDemo.expExcel("书籍管理", headList, colNames, bodyList);
         File desktopDir = FileSystemView.getFileSystemView().getHomeDirectory();
-        String desktopPath = desktopDir.getAbsolutePath();
+        String desktopPath = desktopDir.getAbsolutePath() + "\\";
         PoiDemo.outFile(workbook, desktopPath + "book.xls");
     }
 }
