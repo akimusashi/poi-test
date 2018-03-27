@@ -1,11 +1,11 @@
 package com.moon;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.*;
 import java.util.List;
@@ -20,11 +20,20 @@ public class PoiDemo {
             cell = row.createCell(i);
             cell.setCellValue(headList.get(i));
         }
-        JSONArray names = new JSONArray(colNames);
+        /*JSONArray names = new JSONArray(colNames);
         for (int i = 0, size = bodyList.size(); i < size; i++) {
             row = sheet.createRow(i + 1);
             JSONArray rowInfo = new JSONObject(bodyList.get(i)).toJSONArray(names);
             for (int j = 0, len = rowInfo.length(); j < len; j++) {
+                cell = row.createCell(j);
+                cell.setCellValue(rowInfo.getString(j));
+            }
+        }*/
+        JSONArray names = JSONArray.fromObject(colNames);
+        for (int i = 0, size = bodyList.size(); i < size; i++) {
+            row = sheet.createRow(i + 1);
+            JSONArray rowInfo = JSONObject.fromObject(bodyList.get(i)).toJSONArray(names);
+            for (int j = 0, row_size = rowInfo.size(); j < row_size; j++) {
                 cell = row.createCell(j);
                 cell.setCellValue(rowInfo.getString(j));
             }
